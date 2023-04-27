@@ -2,7 +2,7 @@ package br.com.foguete.rpgproject.core;
 
 import br.com.foguete.rpgproject.domain.Personagem;
 
-public class PersonagemCore {
+public class PersonagemCore implements PersonagemPortIn {
     public void criacaoPersonagem(){
         Personagem personagem = new Personagem()
                 .setNome("Jinx")
@@ -39,5 +39,10 @@ public class PersonagemCore {
         personagem3.setCarisma(10);
 
 
+    }
+
+    @Override
+    public String creatPersonagem(Personagem personagem) {
+        return "1234";
     }
 }
