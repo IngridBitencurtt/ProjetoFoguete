@@ -1,5 +1,7 @@
 package br.com.foguete.rpgproject.domain;
 
+import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
+
 public class Personagem {
     private String nome;
     private String raca;
@@ -26,6 +28,8 @@ public class Personagem {
 
     public Personagem() {
     }
+
+
 
     public String getNome() {
         return nome;
@@ -106,5 +110,18 @@ public class Personagem {
     public Personagem setCarisma(Integer carisma) {
         this.carisma = carisma;
         return this;
+    }
+
+    public static Personagem from(PersonagemEntity personagemEntity) {
+        return new Personagem()
+                .setNome(personagemEntity.getName())
+                .setRaca(personagemEntity.getRace())
+                .setNomeJogador(personagemEntity.getPlayer())
+                .setForca(personagemEntity.getStrength())
+                .setDestreza(personagemEntity.getDexterity())
+                .setConstituicao(personagemEntity.getConstitution())
+                .setInteligencia(personagemEntity.getIntelligence())
+                .setSabedoria(personagemEntity.getWisdom())
+                .setCarisma(personagemEntity.getCharisma());
     }
 }

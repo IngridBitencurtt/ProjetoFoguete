@@ -1,5 +1,6 @@
 package br.com.foguete.rpgproject.adapter.in.dto;
 
+import br.com.foguete.rpgproject.domain.Personagem;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -40,6 +41,17 @@ public class PersonagemDto {
     @Min(1)
     @Max(20)
     private Integer charisma;
+
+    public static PersonagemDto from(Personagem personagem) {
+        return new PersonagemDto(personagem.getNome(),
+                personagem.getRaca(),
+                personagem.getForca(),
+                personagem.getDestreza(),
+                personagem.getConstituicao(),
+                personagem.getInteligencia(),
+                personagem.getSabedoria(),
+                personagem.getCarisma());
+    }
 
     public String getName() {
         return name;
@@ -111,5 +123,16 @@ public class PersonagemDto {
     public PersonagemDto setCharisma(Integer charisma) {
         this.charisma = charisma;
         return this;
+    }
+
+    public PersonagemDto(String name, String race, Integer strength, Integer dexterity, Integer constitution, Integer intelligence, Integer wisdom, Integer charisma) {
+        this.name = name;
+        this.race = race;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.constitution = constitution;
+        this.intelligence = intelligence;
+        this.wisdom = wisdom;
+        this.charisma = charisma;
     }
 }

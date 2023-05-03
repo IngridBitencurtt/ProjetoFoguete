@@ -6,6 +6,7 @@ import br.com.foguete.rpgproject.domain.Personagem;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class HttpPersonagemAdapterIn {
     }
 
     @PostMapping
-    public  ResponseEntity<PersonagemDto> createPersonagem(@RequestBody @Valid PersonagemDto personagemDto,
+    public  ResponseEntity<String> createPersonagem(@RequestBody @Valid PersonagemDto personagemDto,
                                                            @RequestHeader(name = "player-id") String playerId){
         Personagem personagem = new Personagem(personagemDto.getName()
                 ,personagemDto.getRace()
@@ -38,10 +39,16 @@ public class HttpPersonagemAdapterIn {
                 ,personagemDto.getWisdom()
                 ,personagemDto.getCharisma());
 
-        String id = this.personagemPortIn.creatPersonagem(personagem);
+        String idPersonagem = this.personagemPortIn.creatPersonagem(personagem);
 
+        return  ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(idPersonagem).toUri()).build();
+    }
 
-        return  ResponseEntity.created(personagemDto);
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonagemDto> findPersonagemPortIn(@PathVariable("id") String id,
+                                                              @RequestHeader(name = "player-id", required = true)String playerId){
+
+        return ResponseEntity.ok(PersonagemDto.from(this.personagemPortIn.findPersonagemPorIdEPlayerId(id, playerId)));
     }
 
 }

@@ -2,19 +2,21 @@ package br.com.foguete.rpgproject.repository.entity;
 
 import br.com.foguete.rpgproject.domain.Personagem;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.time.Instant;
 
 @Document(collection = "rpg-personagens")
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonagemEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
     private String race;
@@ -30,7 +32,7 @@ public class PersonagemEntity {
 
     public PersonagemEntity() {}
 
-    public PersonagemEntity personagemEntity(Personagem personagem){
+    public static PersonagemEntity personagemEntity(Personagem personagem){
         return new PersonagemEntity()
                 .setName(personagem.getNome())
                 .setRace(personagem.getRaca())
