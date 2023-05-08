@@ -5,7 +5,7 @@ import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 public class Personagem {
     private String nome;
     private String raca;
-    private String nomeJogador;
+    private String idJogador;
     private Integer forca;
     private Integer destreza;
     private Integer constituicao;
@@ -13,10 +13,10 @@ public class Personagem {
     private Integer sabedoria;
     private Integer carisma;
 
-    public Personagem(String nome, String raca, String nomeJogador, Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma) {
+    public Personagem(String nome, String raca, String idJogador, Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma) {
         this.nome = nome;
         this.raca = raca;
-        this.nomeJogador = nomeJogador;
+        this.idJogador = idJogador;
         this.forca = forca;
         this.destreza = destreza;
         this.constituicao = constituicao;
@@ -49,12 +49,12 @@ public class Personagem {
         return this;
     }
 
-    public String getNomeJogador() {
-        return nomeJogador;
+    public String getIdJogador() {
+        return idJogador;
     }
 
-    public Personagem setNomeJogador(String nomeJogador) {
-        this.nomeJogador = nomeJogador;
+    public Personagem setIdJogador(String idJogador) {
+        this.idJogador = idJogador;
         return this;
     }
 
@@ -116,7 +116,7 @@ public class Personagem {
         return new Personagem()
                 .setNome(personagemEntity.getName())
                 .setRaca(personagemEntity.getRace())
-                .setNomeJogador(personagemEntity.getPlayer())
+                .setIdJogador(personagemEntity.getPlayer())
                 .setForca(personagemEntity.getStrength())
                 .setDestreza(personagemEntity.getDexterity())
                 .setConstituicao(personagemEntity.getConstitution())

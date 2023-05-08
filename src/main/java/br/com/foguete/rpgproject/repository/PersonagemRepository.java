@@ -8,7 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface PersonagemRepository extends MongoRepository<PersonagemEntity,String> {
-
-   Optional <PersonagemEntity> findByNameAndPlayer(String name,String playerId);
    Optional <PersonagemEntity> findByIdAndPlayer(String id, String playerId);
+   Optional <PersonagemEntity> findByPlayerAndName(String playerId, String name);
+
+
 }

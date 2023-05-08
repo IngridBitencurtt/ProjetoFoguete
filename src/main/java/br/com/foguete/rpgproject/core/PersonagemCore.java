@@ -1,8 +1,12 @@
 package br.com.foguete.rpgproject.core;
 
+import br.com.foguete.rpgproject.adapter.in.exception.BusinessException;
 import br.com.foguete.rpgproject.adapter.out.PersonagemAdapterOut;
 import br.com.foguete.rpgproject.domain.Personagem;
+import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class PersonagemCore implements PersonagemPortIn {
@@ -15,6 +19,10 @@ public class PersonagemCore implements PersonagemPortIn {
 
     @Override
     public String creatPersonagem(Personagem personagem) {
+        Optional< PersonagemEntity> personagemPorPlayerIdENome = this.personagemAdapterOut.findByPersonagemPorPlayerIdENome(personagem.getIdJogador(),personagem.getNome());
+        if (personagemPorPlayerIdENome.isPresent()){
+            throw new BusinessException("Personagem " + personagem.getNome() + " Já existe" );
+        }
         return this.personagemAdapterOut.criaPersonagem(personagem);
     }
 

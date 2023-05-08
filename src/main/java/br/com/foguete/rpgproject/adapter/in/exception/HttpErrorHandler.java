@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
@@ -68,6 +69,21 @@ public class HttpErrorHandler {
         }
         return bindingResult.getFieldErrors().get(0).getField()
                 + " " + bindingResult.getFieldErrors().stream().findFirst().get().getDefaultMessage();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public @ResponseBody
+    ResponseEntity<?> handleNotFound(HttpServletRequest req, Exception ex) {
+        log.error("handle-not-found; exception; system; exception=\"{}\";", ex.getMessage());
+        return ResponseEntity.notFound().build();
+    }
+
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(BusinessException.class)
+    public @ResponseBody ErrorDTO handleBusinessException(HttpServletRequest req, Exception ex){
+        log.error("handle-not-found; exception; system; exception=\"{}\";", ex.getMessage());
+        return new ErrorDTO(HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
     }
 
 }

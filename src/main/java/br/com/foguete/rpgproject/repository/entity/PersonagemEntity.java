@@ -36,7 +36,7 @@ public class PersonagemEntity {
         return new PersonagemEntity()
                 .setName(personagem.getNome())
                 .setRace(personagem.getRaca())
-                .setPlayer(personagem.getNomeJogador())
+                .setPlayer(personagem.getIdJogador())
                 .setStrength(personagem.getForca())
                 .setDexterity(personagem.getDestreza())
                 .setConstitution(personagem.getConstituicao())

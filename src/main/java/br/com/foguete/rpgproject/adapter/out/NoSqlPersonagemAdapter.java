@@ -7,7 +7,6 @@ import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -38,6 +37,10 @@ public class NoSqlPersonagemAdapter implements  PersonagemAdapterOut {
 
         PersonagemEntity personagemEntity = personagemEntityOptional.get();
         return Personagem.from(personagemEntity);
+    }
+
+    public Optional<PersonagemEntity> findByPersonagemPorPlayerIdENome(String playerId, String nome){
+        return this.personagemRepository.findByPlayerAndName(playerId, nome);
     }
 
 }
