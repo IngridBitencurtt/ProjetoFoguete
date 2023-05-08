@@ -44,6 +44,18 @@ public class PersonagemEntity {
                 .setWisdom(personagem.getSabedoria())
                 .setCharisma(personagem.getCarisma());
     }
+    public static PersonagemEntity atualizaPersonagem(PersonagemEntity personagemEntity, Personagem personagem){
+        return personagemEntity
+                .setName(personagem.getNome())
+                .setRace(personagem.getRaca())
+                .setPlayer(personagem.getIdJogador())
+                .setStrength(personagem.getForca())
+                .setDexterity(personagem.getDestreza())
+                .setConstitution(personagem.getConstituicao())
+                .setIntelligence(personagem.getInteligencia())
+                .setWisdom(personagem.getSabedoria())
+                .setCharisma(personagem.getCarisma());
+    }
 
     public String getId() {
         return id;

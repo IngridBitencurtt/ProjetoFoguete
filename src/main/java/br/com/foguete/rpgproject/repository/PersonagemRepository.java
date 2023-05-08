@@ -1,5 +1,6 @@
 package br.com.foguete.rpgproject.repository;
 
+import br.com.foguete.rpgproject.domain.Personagem;
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

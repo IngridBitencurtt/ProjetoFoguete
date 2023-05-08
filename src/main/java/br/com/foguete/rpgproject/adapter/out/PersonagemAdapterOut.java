@@ -13,4 +13,5 @@ public interface PersonagemAdapterOut {
 
     Optional<PersonagemEntity> findByPersonagemPorPlayerIdENome(String playerId, String nome);
 
+    void atualizaPersonagemPorId(String id, Personagem personagem);
 }

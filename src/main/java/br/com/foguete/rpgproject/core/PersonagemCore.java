@@ -33,4 +33,11 @@ public class PersonagemCore implements PersonagemPortIn {
 
         return personagem;
     }
+
+    @Override
+    public void atualizaPersonagem(String id, Personagem personagem) {
+        this.personagemAdapterOut.atualizaPersonagemPorId(id, personagem);
+
+
+    }
 }

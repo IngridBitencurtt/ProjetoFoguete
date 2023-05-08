@@ -43,4 +43,15 @@ public class NoSqlPersonagemAdapter implements  PersonagemAdapterOut {
         return this.personagemRepository.findByPlayerAndName(playerId, nome);
     }
 
+    @Override
+    public void atualizaPersonagemPorId(String id, Personagem personagem) {
+        PersonagemEntity personagemEntity = this.personagemRepository.findByIdAndPlayer(id, personagem.getIdJogador())
+                .orElseThrow(NotFoundException::new);
+
+        PersonagemEntity personagemAtualizado = PersonagemEntity.atualizaPersonagem(personagemEntity, personagem);
+        this.personagemRepository.save(personagemAtualizado);
+
+
+    }
+
 }

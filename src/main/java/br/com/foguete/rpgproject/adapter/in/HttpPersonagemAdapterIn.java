@@ -51,4 +51,30 @@ public class HttpPersonagemAdapterIn {
         return ResponseEntity.ok(PersonagemDto.from(this.personagemPortIn.findPersonagemPorIdEPlayerId(id, playerId)));
     }
 
+
+    //Criar rota PUT, dado um id
+    // onde o personagem será atualizado
+    // regra 1 - só retornar o personagem do player-id correspondente
+    // regra 1.1 - caso não encontre retornar 404 (not found) com body vazio
+    // regra 2 - caso encontre, atualizar todos os valores do personagem
+    // regra 3 - retornar status 204, no_content, sem body.
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonagemDto> atualizaPersonagem(@RequestBody @Valid PersonagemDto personagemDto,
+                                                   @PathVariable("id") String id,
+                                                   @RequestHeader(name = "player-id", required = true)String playerId){
+        Personagem personagem = new Personagem(personagemDto.getName()
+                ,personagemDto.getRace()
+                ,playerId
+                ,personagemDto.getStrength()
+                ,personagemDto.getDexterity()
+                ,personagemDto.getConstitution()
+                ,personagemDto.getIntelligence()
+                ,personagemDto.getWisdom()
+                ,personagemDto.getCharisma());
+
+        this.personagemPortIn.atualizaPersonagem(id, personagem);
+
+        return ResponseEntity.noContent().build();
+
+}
 }
