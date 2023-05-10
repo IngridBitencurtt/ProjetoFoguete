@@ -43,7 +43,11 @@ public class HttpPersonagemAdapterIn {
 
         return  ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(idPersonagem).toUri()).build();
     }
-
+    //Criar uma rota GET dado um id
+    //onde será retornado o personagem criado
+    //regra 1 - só retornar o personagem do player-id correspondente
+    //regra 1.1 - caso não encontre retornar 404 (not found) com body vazio
+    //regra 2 - caso encontre, retornar informações do personagem, sem retornar player-id, id do banco, sem data atualizacao ou criacao, status 200.
     @GetMapping("/{id}")
     public ResponseEntity<PersonagemDto> findPersonagemPortIn(@PathVariable("id") String id,
                                                               @RequestHeader(name = "player-id", required = true)String playerId){
@@ -52,10 +56,10 @@ public class HttpPersonagemAdapterIn {
     }
 
 
-    //Criar rota PUT, dado um id
-    // onde o personagem será atualizado
+    //Criar rota PUT, dado um id onde o personagem será atualizado
     // regra 1 - só retornar o personagem do player-id correspondente
     // regra 1.1 - caso não encontre retornar 404 (not found) com body vazio
+    // regra 1.2 - não atualizar personagem com o mesmo nome de outro personagem já salvo na base, do mesmo playerId, retornando 422
     // regra 2 - caso encontre, atualizar todos os valores do personagem
     // regra 3 - retornar status 204, no_content, sem body.
     @PutMapping("/{id}")

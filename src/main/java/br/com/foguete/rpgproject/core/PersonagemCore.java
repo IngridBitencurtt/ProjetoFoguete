@@ -36,7 +36,19 @@ public class PersonagemCore implements PersonagemPortIn {
 
     @Override
     public void atualizaPersonagem(String id, Personagem personagem) {
-        this.personagemAdapterOut.atualizaPersonagemPorId(id, personagem);
+
+        Optional<PersonagemEntity> personagemPorPlayerIdENome =
+                this.personagemAdapterOut.findByPersonagemPorPlayerIdENome(personagem.getIdJogador(), personagem.getNome());
+
+        if (personagemPorPlayerIdENome.isEmpty()){
+            this.personagemAdapterOut.atualizaPersonagemPorId(id, personagem);
+            return;
+        }
+        if (personagemPorPlayerIdENome.get().getId().equals(id)){
+            this.personagemAdapterOut.atualizaPersonagemPorId(id, personagem);
+            return;
+        }
+        throw new BusinessException("Personagem "+ personagemPorPlayerIdENome.get().getName() + " já existe");
 
 
     }
