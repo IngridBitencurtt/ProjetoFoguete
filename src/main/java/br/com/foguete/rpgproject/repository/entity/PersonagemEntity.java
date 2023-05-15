@@ -54,7 +54,8 @@ public class PersonagemEntity {
                 .setConstitution(personagem.getConstituicao())
                 .setIntelligence(personagem.getInteligencia())
                 .setWisdom(personagem.getSabedoria())
-                .setCharisma(personagem.getCarisma());
+                .setCharisma(personagem.getCarisma())
+                .setUpdatedAt(Instant.now());
     }
 
     public String getId() {

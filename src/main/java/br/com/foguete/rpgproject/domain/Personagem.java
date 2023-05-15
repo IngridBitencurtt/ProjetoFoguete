@@ -2,6 +2,8 @@ package br.com.foguete.rpgproject.domain;
 
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 
+import java.time.Instant;
+
 public class Personagem {
     private String nome;
     private String raca;
