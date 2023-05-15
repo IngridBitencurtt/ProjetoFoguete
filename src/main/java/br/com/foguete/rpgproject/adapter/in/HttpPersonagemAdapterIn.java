@@ -3,6 +3,7 @@ package br.com.foguete.rpgproject.adapter.in;
 import br.com.foguete.rpgproject.adapter.in.dto.PersonagemDto;
 import br.com.foguete.rpgproject.core.PersonagemPortIn;
 import br.com.foguete.rpgproject.domain.Personagem;
+import br.com.foguete.rpgproject.repository.PersonagemRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -81,4 +82,26 @@ public class HttpPersonagemAdapterIn {
         return ResponseEntity.noContent().build();
 
 }
+//    Criar rota DELETE recebendo o id do personagem, e o playerId - ok
+//    regra 1 - buscar o personagem no repositorio - ok
+//    regra 1.1 - caso não exista retornar 404 - ok
+//    regra 2 - deletar o personagem
+//    regra 3 - em caso de sucesso, retornar status 204, no_content, e body vazio - ok
+    @DeleteMapping("/{id}")
+    public ResponseEntity<PersonagemDto> deletaPersonagem(@PathVariable("id") String id,
+                                                          @RequestHeader(name = "player-id", required = true) String playerId) {
+
+        this.personagemPortIn.deletePersonagem(id, playerId);
+
+
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+
+
+
+
+
 }

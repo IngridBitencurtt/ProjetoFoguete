@@ -4,6 +4,7 @@ import br.com.foguete.rpgproject.adapter.in.exception.BusinessException;
 import br.com.foguete.rpgproject.adapter.out.PersonagemAdapterOut;
 import br.com.foguete.rpgproject.domain.Personagem;
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -49,6 +50,14 @@ public class PersonagemCore implements PersonagemPortIn {
             return;
         }
         throw new BusinessException("Personagem "+ personagemPorPlayerIdENome.get().getName() + " já existe");
+
+
+    }
+
+    @Override
+    public void deletePersonagem(String id, String playerId) {
+
+        this.personagemAdapterOut.deletePersonagem(id, playerId);
 
 
     }

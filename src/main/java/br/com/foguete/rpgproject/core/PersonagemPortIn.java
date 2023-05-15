@@ -8,4 +8,6 @@ public interface PersonagemPortIn {
     Personagem findPersonagemPorIdEPlayerId(String id, String playerId);
 
     void atualizaPersonagem(String id, Personagem personagem);
+
+    void deletePersonagem(String id, String playerId);
 }
