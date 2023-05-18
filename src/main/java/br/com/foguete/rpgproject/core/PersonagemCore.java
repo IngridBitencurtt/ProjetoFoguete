@@ -7,7 +7,10 @@ import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonagemCore implements PersonagemPortIn {
@@ -60,5 +63,22 @@ public class PersonagemCore implements PersonagemPortIn {
         this.personagemAdapterOut.deletePersonagem(id, playerId);
 
 
+    }
+
+    @Override
+    public List<Personagem> findAllPersonagens(Integer strength, Integer dexterity, Integer constitution, Integer intelligence,
+                                               Integer wisdom, Integer charisma, String playerId) {
+
+        List<PersonagemEntity> personagemEntityList = this.personagemAdapterOut.findPersonagens(strength, dexterity,
+                constitution, intelligence, wisdom, charisma, playerId);
+
+        List<Personagem> personagemList = new ArrayList<>();
+
+        for (PersonagemEntity personagemEntity : personagemEntityList) {
+            Personagem personagem = Personagem.from(personagemEntity);
+            personagemList.add(personagem);
+        }
+
+        return personagemList;
     }
 }

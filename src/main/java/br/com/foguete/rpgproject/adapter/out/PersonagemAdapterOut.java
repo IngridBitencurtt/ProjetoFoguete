@@ -3,6 +3,7 @@ package br.com.foguete.rpgproject.adapter.out;
 import br.com.foguete.rpgproject.domain.Personagem;
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PersonagemAdapterOut {
@@ -16,4 +17,6 @@ public interface PersonagemAdapterOut {
     void atualizaPersonagemPorId(String id, Personagem personagem);
 
     void deletePersonagem(String id, String playerId);
+
+    List<PersonagemEntity> findPersonagens(Integer strength, Integer dexterity, Integer constitution, Integer intelligence, Integer wisdom, Integer charisma, String playerId);
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -84,6 +85,14 @@ public class HttpErrorHandler {
     public @ResponseBody ErrorDTO handleBusinessException(HttpServletRequest req, Exception ex){
         log.error("handle-not-found; exception; system; exception=\"{}\";", ex.getMessage());
         return new ErrorDTO(HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public @ResponseBody
+    ErrorDTO handleBadRequestMissingServletRequestParameterException(HttpServletRequest req, Exception ex) {
+        log.error("handle-bad-request-missing-servlet-request-parameter-exception; exception; system; exception=\"{}\";", ex.getMessage());
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
     }
 
 }
