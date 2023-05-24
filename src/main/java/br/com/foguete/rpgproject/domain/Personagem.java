@@ -6,7 +6,7 @@ import java.time.Instant;
 
 public class Personagem {
     private String nome;
-    private String raca;
+    private Raca raca;
     private String idJogador;
     private Integer forca;
     private Integer destreza;
@@ -15,7 +15,7 @@ public class Personagem {
     private Integer sabedoria;
     private Integer carisma;
 
-    public Personagem(String nome, String raca, String idJogador, Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma) {
+    public Personagem(String nome, Raca raca, String idJogador, Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma) {
         this.nome = nome;
         this.raca = raca;
         this.idJogador = idJogador;
@@ -26,7 +26,6 @@ public class Personagem {
         this.sabedoria = sabedoria;
         this.carisma = carisma;
     }
-
 
     public Personagem() {
     }
@@ -42,11 +41,11 @@ public class Personagem {
         return this;
     }
 
-    public String getRaca() {
+    public Raca getRaca() {
         return raca;
     }
 
-    public Personagem setRaca(String raca) {
+    public Personagem setRaca(Raca raca) {
         this.raca = raca;
         return this;
     }
@@ -114,10 +113,11 @@ public class Personagem {
         return this;
     }
 
+
     public static Personagem from(PersonagemEntity personagemEntity) {
         return new Personagem()
                 .setNome(personagemEntity.getName())
-                .setRaca(personagemEntity.getRace())
+                .setRaca(Raca.byValue(personagemEntity.getRace()))
                 .setIdJogador(personagemEntity.getPlayer())
                 .setForca(personagemEntity.getStrength())
                 .setDestreza(personagemEntity.getDexterity())

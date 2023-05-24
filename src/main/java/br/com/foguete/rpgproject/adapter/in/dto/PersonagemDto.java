@@ -1,12 +1,14 @@
 package br.com.foguete.rpgproject.adapter.in.dto;
 
 import br.com.foguete.rpgproject.domain.Personagem;
+import br.com.foguete.rpgproject.domain.Raca;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -15,8 +17,8 @@ public class PersonagemDto {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private String race;
+    @NotNull
+    private Raca race;
 
     @Min(1)
     @Max(20)
@@ -62,11 +64,11 @@ public class PersonagemDto {
         return this;
     }
 
-    public String getRace() {
+    public Raca getRace() {
         return race;
     }
 
-    public PersonagemDto setRace(String race) {
+    public PersonagemDto setRace(Raca race) {
         this.race = race;
         return this;
     }
@@ -125,7 +127,7 @@ public class PersonagemDto {
         return this;
     }
 
-    public PersonagemDto(String name, String race, Integer strength, Integer dexterity, Integer constitution, Integer intelligence, Integer wisdom, Integer charisma) {
+    public PersonagemDto(String name, Raca race, Integer strength, Integer dexterity, Integer constitution, Integer intelligence, Integer wisdom, Integer charisma) {
         this.name = name;
         this.race = race;
         this.strength = strength;

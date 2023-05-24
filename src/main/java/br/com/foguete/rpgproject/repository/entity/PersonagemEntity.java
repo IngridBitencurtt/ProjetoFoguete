@@ -1,6 +1,7 @@
 package br.com.foguete.rpgproject.repository.entity;
 
 import br.com.foguete.rpgproject.domain.Personagem;
+import br.com.foguete.rpgproject.domain.Raca;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -35,7 +36,7 @@ public class PersonagemEntity {
     public static PersonagemEntity personagemEntity(Personagem personagem){
         return new PersonagemEntity()
                 .setName(personagem.getNome())
-                .setRace(personagem.getRaca())
+                .setRace(Raca.valueOf(personagem.getRaca()))
                 .setPlayer(personagem.getIdJogador())
                 .setStrength(personagem.getForca())
                 .setDexterity(personagem.getDestreza())
@@ -47,7 +48,7 @@ public class PersonagemEntity {
     public static PersonagemEntity atualizaPersonagem(PersonagemEntity personagemEntity, Personagem personagem){
         return personagemEntity
                 .setName(personagem.getNome())
-                .setRace(personagem.getRaca())
+                .setRace(Raca.valueOf(personagem.getRaca()))
                 .setPlayer(personagem.getIdJogador())
                 .setStrength(personagem.getForca())
                 .setDexterity(personagem.getDestreza())
