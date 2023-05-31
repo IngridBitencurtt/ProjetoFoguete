@@ -1,6 +1,8 @@
 package br.com.foguete.rpgproject.adapter.in;
 
+import br.com.foguete.rpgproject.adapter.in.dto.NameDto;
 import br.com.foguete.rpgproject.adapter.in.dto.PersonagemDto;
+import br.com.foguete.rpgproject.adapter.in.dto.PersonagemId;
 import br.com.foguete.rpgproject.core.PersonagemPortIn;
 import br.com.foguete.rpgproject.domain.Personagem;
 import br.com.foguete.rpgproject.repository.PersonagemRepository;
@@ -118,6 +120,18 @@ public class HttpPersonagemAdapterIn {
         return ResponseEntity.ok(personagemDtoList);
 
     }
+
+@PostMapping("/random")
+    public  ResponseEntity<PersonagemId> createRandom(@RequestBody @Valid NameDto name,
+                                                    @RequestHeader(name = "player-id") String playerId){
+
+        Personagem personagem = Personagem.randomPersonagem(name.getName(), playerId);
+        String idDoPersonagem = this.personagemPortIn.creatPersonagem(personagem);
+
+
+        return ResponseEntity.ok(new PersonagemId().setId(idDoPersonagem));
+    }
+
 
 
 

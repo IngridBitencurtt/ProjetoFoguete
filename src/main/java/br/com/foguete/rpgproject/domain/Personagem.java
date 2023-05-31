@@ -30,6 +30,23 @@ public class Personagem {
     public Personagem() {
     }
 
+    public static Personagem randomPersonagem(String name, String playerId){
+        return  new Personagem(name,
+                Raca.HUMANO,
+                playerId,
+                randomProperty(),
+                randomProperty(),
+                randomProperty(),
+                randomProperty(),
+                randomProperty(),
+                randomProperty());
+    }
+
+    public static Integer randomProperty(){
+        return  (int) (Math.random() * 20) + 1;
+
+    }
+
 
 
     public String getNome() {

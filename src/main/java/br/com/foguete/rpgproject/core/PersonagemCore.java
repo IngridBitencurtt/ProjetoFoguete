@@ -23,7 +23,7 @@ public class PersonagemCore implements PersonagemPortIn {
 
     @Override
     public String creatPersonagem(Personagem personagem) {
-        Optional< PersonagemEntity> personagemPorPlayerIdENome = this.personagemAdapterOut.findByPersonagemPorPlayerIdENome(personagem.getIdJogador(),personagem.getNome());
+        Optional<PersonagemEntity> personagemPorPlayerIdENome = this.personagemAdapterOut.findByPersonagemPorPlayerIdENome(personagem.getIdJogador(),personagem.getNome());
         if (personagemPorPlayerIdENome.isPresent()){
             throw new BusinessException("Personagem " + personagem.getNome() + " Já existe" );
         }
