@@ -2,7 +2,7 @@ package br.com.foguete.rpgproject.domain;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import java.util.Objects;
+import java.util.*;
 
 public enum Raca {
     ANAO("anão"),
@@ -16,6 +16,17 @@ public enum Raca {
     TIEFLING("tiefling");
 
     String racaNome;
+
+    private static final List<Raca> VALUES =
+            Collections.unmodifiableList(Arrays.asList(values()));
+
+    private static  final int SIZE = VALUES.size();
+
+    private static final Random RANDOM = new Random();
+
+    public static Raca randomRaca(){
+        return  VALUES.get(RANDOM.nextInt(SIZE));
+    }
 
     Raca(String raca){
         this.racaNome = raca;

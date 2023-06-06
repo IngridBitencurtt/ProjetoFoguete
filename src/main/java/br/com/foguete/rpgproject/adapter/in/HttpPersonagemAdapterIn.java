@@ -132,6 +132,17 @@ public class HttpPersonagemAdapterIn {
         return ResponseEntity.ok(new PersonagemId().setId(idDoPersonagem));
     }
 
+    @PostMapping("/random-dice")
+    public  ResponseEntity<PersonagemId> createRandomDice(@RequestBody @Valid NameDto name,
+                                                      @RequestHeader(name = "player-id") String playerId){
+
+        Personagem personagem = Personagem.randomPersonagemDice(name.getName(), playerId);
+        String idDoPersonagem = this.personagemPortIn.creatPersonagem(personagem);
+
+
+        return ResponseEntity.ok(new PersonagemId().setId(idDoPersonagem));
+    }
+
 
 
 
