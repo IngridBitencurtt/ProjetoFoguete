@@ -2,22 +2,24 @@ package br.com.foguete.rpgproject.core;
 
 import br.com.foguete.rpgproject.adapter.in.exception.BusinessException;
 import br.com.foguete.rpgproject.adapter.out.PersonagemAdapterOut;
+import br.com.foguete.rpgproject.domain.Dado;
 import br.com.foguete.rpgproject.domain.Personagem;
+import br.com.foguete.rpgproject.domain.Raca;
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PersonagemCore implements PersonagemPortIn {
     private final PersonagemAdapterOut personagemAdapterOut;
+    private final DadoPortIn dadoPortIn;
 
-    public PersonagemCore(PersonagemAdapterOut personagemAdapterOut) {
+    public PersonagemCore(PersonagemAdapterOut personagemAdapterOut, DadoPortIn dadoPortIn) {
         this.personagemAdapterOut = personagemAdapterOut;
+        this.dadoPortIn = dadoPortIn;
     }
 
 
@@ -80,5 +82,18 @@ public class PersonagemCore implements PersonagemPortIn {
         }
 
         return personagemList;
+    }
+
+    public String createRandom(Personagem personagem) {
+
+        personagem.setCarisma(dadoPortIn.getDiceResult(Dado.D20))
+                .setForca(dadoPortIn.getDiceResult(Dado.D20))
+                .setDestreza(dadoPortIn.getDiceResult(Dado.D20))
+                .setConstituicao(dadoPortIn.getDiceResult(Dado.D20))
+                .setInteligencia(dadoPortIn.getDiceResult(Dado.D20))
+                .setSabedoria(dadoPortIn.getDiceResult(Dado.D20))
+                .setRaca(Raca.randomRaca());
+
+        return this.creatPersonagem(personagem);
     }
 }

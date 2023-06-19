@@ -3,8 +3,6 @@ package br.com.foguete.rpgproject.domain;
 import br.com.foguete.rpgproject.core.DadoCore;
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;
 
-import java.time.Instant;
-
 public class Personagem {
 
     private String nome;
@@ -45,22 +43,11 @@ public class Personagem {
     }
 
     public static Integer randomProperty(){
+
         return  (int) (Math.random() * 20) + 1;
     }
 
 
-    public static Personagem randomPersonagemDice(String name, String playerId) {
-        DadoCore dadoCore = new DadoCore();
-        return new Personagem(name,
-                Raca.randomRaca(),
-                playerId,
-                dadoCore.getDiceResult(Dado.D20),
-                dadoCore.getDiceResult(Dado.D20),
-                dadoCore.getDiceResult(Dado.D20),
-                dadoCore.getDiceResult(Dado.D20),
-                dadoCore.getDiceResult(Dado.D20),
-                dadoCore.getDiceResult(Dado.D20));
-    }
 
 
 

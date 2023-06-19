@@ -15,4 +15,6 @@ public interface PersonagemPortIn {
 
     List<Personagem> findAllPersonagens(Integer strength, Integer dexterity, Integer constitution, Integer intelligence,
                                         Integer wisdom, Integer charisma, String playerId);
+
+    String createRandom(Personagem personagem);
 }

@@ -1,6 +1,7 @@
 package br.com.foguete.rpgproject.adapter.out;
 
 import br.com.foguete.rpgproject.adapter.in.exception.NotFoundException;
+import br.com.foguete.rpgproject.domain.Dado;
 import br.com.foguete.rpgproject.domain.Personagem;
 import br.com.foguete.rpgproject.repository.PersonagemRepository;
 import br.com.foguete.rpgproject.repository.entity.PersonagemEntity;

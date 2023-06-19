@@ -121,7 +121,7 @@ public class HttpPersonagemAdapterIn {
 
     }
 
-@PostMapping("/random")
+@PostMapping("/random-dice")
     public  ResponseEntity<PersonagemId> createRandom(@RequestBody @Valid NameDto name,
                                                     @RequestHeader(name = "player-id") String playerId){
 
@@ -132,12 +132,15 @@ public class HttpPersonagemAdapterIn {
         return ResponseEntity.ok(new PersonagemId().setId(idDoPersonagem));
     }
 
-    @PostMapping("/random-dice")
+    @PostMapping("/random")
     public  ResponseEntity<PersonagemId> createRandomDice(@RequestBody @Valid NameDto name,
                                                       @RequestHeader(name = "player-id") String playerId){
 
-        Personagem personagem = Personagem.randomPersonagemDice(name.getName(), playerId);
-        String idDoPersonagem = this.personagemPortIn.creatPersonagem(personagem);
+        Personagem personagem = new Personagem();
+        personagem.setNome(personagem.getNome());
+        personagem.setIdJogador(playerId);
+
+        String idDoPersonagem = this.personagemPortIn.createRandom(personagem);
 
 
         return ResponseEntity.ok(new PersonagemId().setId(idDoPersonagem));
